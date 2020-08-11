@@ -1,6 +1,5 @@
 const galleryDiv = document.querySelector('#gallery');
 
-
 /** Async function uses fetch to obtain and parse data.
  *
  * @param {string} URL to be fetched.

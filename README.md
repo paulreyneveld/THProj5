@@ -1,3 +1,8 @@
-This project satisfies the requirements as set out by Treehouse for the fifth project in the Javascript
-Tech Degree course. The intended goal is to display the creator's proficiency when it comes to the access
-and manipulation of APIs with regard to Javascript. 
+# TH Project 5
+
+This project was built to satisfy the requirements of the fifth Treehouse FSJS Tech Degree project. 
+
+The following project displays the creator's proficiency when working with APIs. It employs the fetch api to obtain data from 
+an open api. It then uses that data to populate an employee directory. 
+ 
+
