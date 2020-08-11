@@ -2,7 +2,7 @@
 
 This project was built to satisfy the requirements of the fifth Treehouse FSJS Tech Degree project. 
 
-The following project displays the creator's proficiency when working with APIs. It employs the fetch api to obtain data from 
-an open api. It then uses that data to populate an employee directory. 
+The following project displays the creator's proficiency when working with APIs. It employs the fetch API to obtain data from 
+an open API. It then uses that data to populate an employee directory. 
  
 
