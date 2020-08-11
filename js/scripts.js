@@ -9,9 +9,9 @@ const galleryDiv = document.querySelector('#gallery');
 async function fetchData(url) {
 	const response = await fetch(url);
 	const data = await response.json();
-	const userList = data.results;
+	const { results } = data;
 	// Passes data to create main html
-	generateMainHTML(userList);
+	generateMainHTML(results);
 }
 
 // Calls async function to obtain data from the API. 
@@ -22,9 +22,9 @@ fetchData("https://randomuser.me/api/?results=12&nat=us");
  * @param {object} Returned data from API.
  */ 
 
-function generateMainHTML(userList) {
+function generateMainHTML(results) {
 	// Generates the HTML based on the data passed. 
-	userList.forEach(user => {
+	results.forEach(user => {
 		const cardDiv = document.createElement('div');
 		const imgContDiv = document.createElement('div');
 		const infoContDiv = document.createElement('div');
@@ -46,12 +46,12 @@ function generateMainHTML(userList) {
 	// And, passes the data from the async function along with the index from the 
 	// event listener on to the generateModalHTML function. 
 	const cardNodeList = document.querySelectorAll('.card');
-	// *** Clever trick I found while googling to force a node list into an array-like structure for
-	// *** manipulation. 
+
+	// Force nodelist into an array like structure for easier manipulation. 
 	const cardArr = Array.from(cardNodeList);
 	cardArr.forEach((card, index) => {
 		card.addEventListener('click', (e) => {
-			generateModalHTML(userList, index)
+			generateModalHTML(results, index)
 		});
 	});
 }
@@ -62,9 +62,9 @@ function generateMainHTML(userList) {
  * @param {integer} Index from event listener. 
  */
 
-function generateModalHTML(userList, index) {
-	// Manipulates userList data for the appropriate DOB foratting on output. 
-	let dob = userList[index].dob.date.substring(0,10);
+function generateModalHTML(results, index) {
+	// Manipulates results data for the appropriate DOB formatting on output. 
+	let dob = results[index].dob.date.substring(0,10);
 	let formattedDate = `${dob.substring(5,7)}/${dob.substring(8,12)}/${dob.substring(2,4)}`;
 
 	// Generates HTMl for the modal window. 
@@ -86,13 +86,13 @@ function generateModalHTML(userList, index) {
 	button.after(modalInfoContDiv);
 	button.innerHTML = '<strong>X</strong>';
 	modalInfoContDiv.innerHTML = 
-                       `<img class="modal-img" src="${userList[index].picture.large}" alt="profile picture">
-                        <h3 id="name" class="modal-name cap">${userList[index].name.first} ${userList[index].name.last}</h3>
-                        <p class="modal-text">${userList[index].email}</p>
-                        <p class="modal-text cap">${userList[index].location.city}</p>
+                       `<img class="modal-img" src="${results[index].picture.large}" alt="profile picture">
+                        <h3 id="name" class="modal-name cap">${results[index].name.first} ${results[index].name.last}</h3>
+                        <p class="modal-text">${results[index].email}</p>
+                        <p class="modal-text cap">${results[index].location.city}</p>
                         <hr>
-                        <p class="modal-text">${userList[index].cell}</p>
-                        <p class="modal-text">${userList[index].location.street.number}, ${userList[index].location.street.name} ${userList[index].location.city}, ${userList[index].location.state} ${userList[index].location.postcode}  </p>
+                        <p class="modal-text">${results[index].cell}</p>
+                        <p class="modal-text">${results[index].location.street.number}, ${results[index].location.street.name} ${results[index].location.city}, ${results[index].location.state} ${results[index].location.postcode}  </p>
                         <p class="modal-text">Birthday: ${formattedDate} </p>`;
 	
 	// Event listener on button closes modal window when user is finished. 	
